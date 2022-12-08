@@ -1,6 +1,6 @@
 from datetime import datetime
 
-def sample_responses(input_text):
+def sample_responses(input_text, userID):
     user_message = str(input_text).lower()
 
     if user_message in ("михайло", "міша", "кусень", "дупокус", "michael", "kusaka", "dupokus" "майкл"):
@@ -17,3 +17,5 @@ def sample_responses(input_text):
 
     if user_message in ("влад", "vlad", "gay"):
         return "Влад гей, так, це всі знають, прізвище ролі не грає."
+    
+    
