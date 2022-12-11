@@ -1,33 +1,19 @@
-import Constants as keys
-from telegram.ext import *
-import Responses as R
+import logging
 from telegram import Update
+from telegram.ext import *
 
-print("Fired up and ready to serve!")
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO
+)
 
-def start_command(update, context):
-    update.message.reply_text("Fired up and ready to serve!")
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await context.bot.send_message(chat_id=update.effective_chat.id, text="I'm a bot, please talk to me!")
 
-def handle_message(update: Update, context):
-    text = str(update.message.text).lower()
-    response = R.sample_responses(text)
-    userID = update.effective_user.id
-    update.message.reply_text(response)
-
-def error(update, context):
-    print(f"Update {update} caused error {context.error}")
-
-def main():
-    updater = Updater(keys.API_KEY, use_context=True)
-    dp = updater.dispatcher
-
-    dp.add_handler(CommandHandler("start", start_command))
-    dp.add_handler(MessageHandler(Filters.text, handle_message))
-
-    dp.add_error_handler(error)
-    updater.start_polling(2)
-    updater.idle()
+if __name__ == '__main__':
+    application = ApplicationBuilder().token('5984908143:AAGoVhK6joABmAObKU5zEp3waviRLRFXCOA').build()
     
-
-main()        
-        
+    start_handler = CommandHandler('start', start)
+    application.add_handler(start_handler)
+    
+    application.run_polling()
