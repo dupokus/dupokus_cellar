@@ -1,11 +1,8 @@
 import logging
+import keys
+
 from telegram import Update
 from telegram.ext import *
-import os
-from dotenv import load_dotenv
-
-project_folder = os.path.expanduser('~/my-project-dir')  # adjust as appropriate
-load_dotenv(os.path.join(project_folder, '.env'))
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -21,7 +18,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 if __name__ == '__main__':
     
-    BOT_TOKEN = os.getenv('BOT_TOKEN')
+    BOT_TOKEN = os.getenv('keys.token')
     print(BOT_TOKEN)
     application = ApplicationBuilder().token(BOT_TOKEN).build()
     
