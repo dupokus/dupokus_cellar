@@ -18,9 +18,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 if __name__ == '__main__':
     
-    BOT_TOKEN = os.getenv('keys.token')
-    print(BOT_TOKEN)
-    application = ApplicationBuilder().token(BOT_TOKEN).build()
+    application = ApplicationBuilder().token(keys.token).build()
     
     
     start_handler = CommandHandler('start', start)
